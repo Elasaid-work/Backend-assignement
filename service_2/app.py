@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Response
 
 app = Flask(__name__)
 
@@ -11,6 +11,10 @@ def ping():
 @app.route("/hello")
 def hello():
     return jsonify(message="Hello from Service 2")
+
+@app.route("/health")
+def health():
+    return Response("OK", status=200)
 
 
 if __name__ == "__main__":

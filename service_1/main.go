@@ -19,12 +19,17 @@ func main() {
 			"message": "Hello from Service 1",
 		})
 	})
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+                w.WriteHeader(http.StatusOK)
+                w.Write([]byte("OK"))
+        })
+
 
 	log.Println("Service 1 listening on port 8001...")
 	if err := http.ListenAndServe(":8001", nil); err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}
-}
+	}
 
 func jsonResponse(w http.ResponseWriter, data map[string]string) {
 	w.Header().Set("Content-Type", "application/json")
